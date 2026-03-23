@@ -10,7 +10,9 @@
 1. **无需读取海量 CSV**：底层算法自动计算绝对资金吞吐量、盈亏比偏好、最大单笔重仓。
 2. **极速动态响应**：基于 `Cursor / Offset` 动态混合分页的极速 API 抓取器，防限流、防遗漏。
 3. **完美适配 LLM**：将庞大的高频交易流水压缩为高密度的“特征摘要”，直接喂给大语言模型，一秒输出高维度人类可读研报。
-
+## 📞 技术支持与声明
+**主架构师**：lingge66 & AI 团队
+**Twitter**：[@shangdu2005](https://x.com/shangdu2005)
 ---
 
 ## 🚀 方式一：零代码一键魔法安装（推荐普通用户）
@@ -62,6 +64,4 @@ pip install -r requirements.txt
 将项目中的 openclaw_plugin.py 里的 analyze_prediction_wallet_tool 函数，注册为你的 Bot 的 Function Calling / Tools。
 (注：如遇网络阻断，请在 openclaw_plugin.py 内部配置你的本地代理端口。)
 
-## 📞 技术支持与声明
-**主架构师**：lingge66 & AI 团队
-**Twitter**：[@shangdu2005](https://x.com/shangdu2005)
+
