@@ -55,12 +55,16 @@
 ## 💻 方式二：开发者本地集成部署
 
 如果你想将本工具集成到你自己的量化系统或独立 Agent 框架中，请按照以下步骤操作：
-1. 克隆与安装依赖包
+
 ```bash
+1. 克隆与安装依赖包
 git clone [https://github.com/lingge66/polymarket-LinggeTracer.git](https://github.com/lingge66/polymarket-LinggeTracer.git)
 cd polymarket-LinggeTracer
+
+2. 安装依赖
 pip install -r requirements.txt
-2. 注册为 Agent Tool (以 OpenClaw 为例)
+
+3. 注册为 Agent Tool (以 OpenClaw 为例)
 将项目中的 openclaw_plugin.py 里的 analyze_prediction_wallet_tool 函数，注册为你的 Bot 的 Function Calling / Tools。
 (注：如遇网络阻断，请在 openclaw_plugin.py 内部配置你的本地代理端口。)
 🎮 体验魔法
