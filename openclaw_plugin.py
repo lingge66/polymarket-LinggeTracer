@@ -1,20 +1,32 @@
 # openclaw_plugin.py
+import time
 from core_radar import PolymarketAnalyzer
 
-def analyze_prediction_wallet_tool(wallet_address: str) -> str:
+def analyze_prediction_wallet_tool(wallet_address: str, bot_send_message_func=None) -> str:
     """
     OpenClaw Skill/Tool: 分析 Polymarket 预测市场的大户钱包交易模式。
     
     参数:
     - wallet_address (str): 以 0x 开头的以太坊/Polygon钱包地址。
+    - bot_send_message_func (callable): 可选参数。传入机器人的发消息函数，实现电报等客户端的实时进度播报。
     
     返回:
     - 给 AI 阅读的交易统计摘要与研报生成指令。
     """
-    analyzer = PolymarketAnalyzer()  # 如果需要代理，在此处传入 proxy_port="10808"
+    # 实例化分析器，如果你的服务跑在东京 VPS 或者本地，按需开启代理端口
+    analyzer = PolymarketAnalyzer(proxy_port="10808")  
     
-    # 1. 抓取并获取数据浓缩摘要
-    data_summary = analyzer.generate_ai_summary(wallet_address)
+    # 💡 核心新增：定义一个内部回调函数，专门用来向电报/终端更新状态
+    def telegram_updater(msg_text):
+        if bot_send_message_func:
+            # 如果 OpenClaw 传入了发消息的接口，就调用它实时发给用户
+            bot_send_message_func(msg_text)
+        else:
+            # 否则回退为本地打印
+            print(f"[系统播报] {msg_text}")
+
+    # 1. 抓取并获取数据浓缩摘要 (把回调函数传给底层引擎)
+    data_summary = analyzer.generate_ai_summary(wallet_address, progress_callback=telegram_updater)
     
     # 2. 组装终极 System Prompt 给 OpenClaw 大脑
     ai_instruction = f"""
@@ -37,10 +49,17 @@ def analyze_prediction_wallet_tool(wallet_address: str) -> str:
 # ================= 测试你的技能 =================
 if __name__ == "__main__":
     test_wallet = "0xbddf623A2DE3b232677943fFf82e88a38Ff0eE4E"
-    print("正在模拟 OpenClaw BOT 触发技能...")
+    print("🤖 正在模拟 OpenClaw BOT 触发技能...\n")
     
-    # BOT 调用你的函数
-    prompt_for_llm = analyze_prediction_wallet_tool(test_wallet)
+    # 模拟电报机器人的消息发送函数 (用来测试动态进度效果)
+    def mock_telegram_send(msg):
+        # 使用 \r 覆盖上一行，模拟电报消息被 "edit" 更新的视觉效果
+        # 当你在本地 VSCode 的终端运行它时，你会看到进度条在同一行刷新！
+        print(f"\r💬 [电报实时消息推送]: {msg.replace(chr(10), ' ')}", end="", flush=True)
+        time.sleep(0.1)
+        
+    # BOT 调用你的函数，并将发消息的能力传进去
+    prompt_for_llm = analyze_prediction_wallet_tool(test_wallet, bot_send_message_func=mock_telegram_send)
     
-    print("\n✅ 抓取完成！以下内容将自动喂给 OpenClaw 的 LLM 大脑进行最终研报生成：\n")
+    print("\n\n✅ 抓取完成！以下内容将自动喂给 OpenClaw 的 LLM 大脑进行最终研报生成：\n")
     print(prompt_for_llm)
