@@ -1,4 +1,4 @@
-# 🪐 polymarket-LinggeTracer (全领域预测市场大户雷达)
+# 🪐 polymarket-LinggeTracer (全领域预测市场大户雷达)1.1版本
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![OpenClaw Ready](https://img.shields.io/badge/OpenClaw-Ready-orange.svg)
@@ -10,6 +10,10 @@
 1. **无需读取海量 CSV**：底层算法自动计算绝对资金吞吐量、盈亏比偏好、最大单笔重仓。
 2. **极速动态响应**：基于 `Cursor / Offset` 动态混合分页的极速 API 抓取器，防限流、防遗漏。
 3. **完美适配 LLM**：将庞大的高频交易流水压缩为高密度的“特征摘要”，直接喂给大语言模型，一秒输出高维度人类可读研报。
+## ❂ 最近更新内容
+1. **上帝视角财务审计 (绝对 PnL 与胜率)：不再盲猜收益！深度接入隐藏排行榜与底层持仓 API，精确提取大户的 All-time 真实总盈亏、7天/30天资金趋势，以及基于真实结算开奖的绝对胜率。
+2. **高阶量化流派解码：不仅统计单纯的 Buy/Sell，更深度解析盘口做市行为（SPLIT/MERGE）与到期兑付（REDEEM）。让 AI 瞬间识破伪装成大户的“无风险套利机器人”或“高频对冲脚本”。
+3. **用户名免转换直通车 (智能寻址)：告别反人类的 0x... 十六进制长串！支持直接输入 Polymarket 玩家用户名（如 Theo4），底层雷达全自动在全网数据库中寻址对齐。
 ## 📞 技术支持与声明
 **主架构师**：lingge66 & AI 团队
 **Twitter**：[@shangdu2005](https://x.com/shangdu2005)
