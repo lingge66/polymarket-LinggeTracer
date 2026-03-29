@@ -1,3 +1,15 @@
+# ==============================================================================
+# Copyright (C) 2026 领哥大虾 (lingge66). All Rights Reserved.
+# Project: polymarket-LinggeTracer
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# 警告：本项目采用 GPLv3 传染性开源协议。任何企业或个人未经授权，
+# 严禁将本核心逻辑（及其衍生算法）用于闭源商业化盈利项目。违者必究。
+# ==============================================================================
 # openclaw_plugin.py
 import time
 from core_radar import PolymarketAnalyzer
